@@ -15,9 +15,11 @@ services:
       context: ./backend
     ports:
       - "3001:3001"
-    environment:
-      - PORT=3001 
-      - DATABASE_URL=postgresql://app:secret@db:5432/myapp
+    # environment:
+    #   - PORT=3001 
+    #   - DATABASE_URL=postgresql://app:secret@db:5432/myapp
+    env_file:
+      - ./backend/.env
     depends_on:
       - db
     networks:
@@ -56,3 +58,7 @@ volumes:
 networks:
   frontend-net:
   backend-net:
+
+secrets:
+  db_password:
+    file: ./db_password.txt
